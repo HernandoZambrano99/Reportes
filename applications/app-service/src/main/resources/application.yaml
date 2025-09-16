@@ -39,3 +39,7 @@ management:
         enabled: true
 cors:
   allowed-origins: "http://localhost:4200,http://localhost:8080"
+security:
+  jwt:
+    secret: "${SPRING_SECURITY_JWT_SECRET:0Dz2RFrDttxXG9ZgQ9s6nJ8lcnFv9HQ1mFtuG3B0TXQ=}"
+    expiration-ms: "${SPRING_SECURITY_JWT_EXPIRATION_MS:3600000}"
