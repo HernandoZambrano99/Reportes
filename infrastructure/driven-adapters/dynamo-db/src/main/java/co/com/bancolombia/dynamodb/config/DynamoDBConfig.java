@@ -40,6 +40,13 @@ public class DynamoDBConfig {
     }
 
     @Bean
+    public DynamoDbAsyncClient amazonDynamoDBDefault(@Value("${aws.region}") String region) {
+        return DynamoDbAsyncClient.builder()
+                .region(Region.of(region))
+                .build();
+    }
+
+    @Bean
     public DynamoDbEnhancedAsyncClient getDynamoDbEnhancedAsyncClient(DynamoDbAsyncClient client) {
         return DynamoDbEnhancedAsyncClient.builder()
                 .dynamoDbClient(client)
