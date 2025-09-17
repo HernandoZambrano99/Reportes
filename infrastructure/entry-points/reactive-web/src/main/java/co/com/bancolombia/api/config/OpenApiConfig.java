@@ -12,8 +12,8 @@ public class OpenApiConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Solicitudes API")
+                        .title("Reportes API")
                         .version("1.0")
-                        .description("Documentación de los endpoints de solicitudes"));
+                        .description("Documentación de los endpoints de reportes"));
     }
 }
