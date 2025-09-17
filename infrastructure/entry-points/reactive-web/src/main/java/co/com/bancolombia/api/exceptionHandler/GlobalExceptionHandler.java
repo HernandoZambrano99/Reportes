@@ -2,6 +2,8 @@ package co.com.bancolombia.api.exceptionHandler;
 
 import co.com.bancolombia.api.constants.ErrorCode;
 import co.com.bancolombia.api.constants.ErrorConstants;
+import co.com.bancolombia.usecase.reporte.exception.ReporteReadException;
+import co.com.bancolombia.usecase.reporte.exception.SolicitudAprobadaInvalidaException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.web.reactive.error.AbstractErrorWebExceptionHandler;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
@@ -47,6 +49,14 @@ public class GlobalExceptionHandler extends AbstractErrorWebExceptionHandler {
 
         if (error instanceof org.springframework.web.server.ServerWebInputException sie) {
             return buildResponse(HttpStatus.BAD_REQUEST, sie.getReason(), request.path());
+        }
+
+        if (error instanceof ReporteReadException rre) {
+            return buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, request.path(), rre.getMessage());
+        }
+
+        if (error instanceof SolicitudAprobadaInvalidaException saie) {
+            return buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, request.path(), saie.getMessage());
         }
 
         var errorProps = getErrorAttributes(request, ErrorAttributeOptions.defaults());

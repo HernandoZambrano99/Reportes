@@ -1,11 +1,13 @@
 package co.com.bancolombia.api.constants;
 
 public class AppConstants {
+    private AppConstants() {
+    }
     public static final String BEARER = "Bearer ";
-    public static final String AUTHORIZATION_HEADER = "Authorization";
-    public static final String PAGE_SIZE = "pageSize";
-    public static final String PAGE_NUMBER = "pageNumber";
-    public static final String STATUS_FILTER = "status";
-    public static final String REQUEST_ID = "id";
-
+    public static final String API_REPORTE_PATH = "/api/v1/reportes";
+    public static final String LOG_GET_REPORTE_TRACE = "GET " + API_REPORTE_PATH + " trace={}";
+    public static final String LOG_GET_REPORTE_ERROR = "Error en GET " + API_REPORTE_PATH;
+    public static final String FIELD_ID = "id";
+    public static final String FIELD_TOTAL_SOLICITUDES_APROBADAS = "total solicitudes aprobadas";
+    public static final String FIELD_TOTAL_MONTO_CREDITOS = "total monto creditos";
 }

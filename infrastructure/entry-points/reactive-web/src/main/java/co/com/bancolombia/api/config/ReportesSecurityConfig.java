@@ -45,7 +45,7 @@ public class ReportesSecurityConfig {
                         .pathMatchers("/webjars/swagger-ui/**").permitAll()
                         .pathMatchers("/swagger-ui/**").permitAll()
 
-                        .pathMatchers(HttpMethod.GET, "/api/v1/reportes").hasAuthority("ROLE_ASESOR")
+                        .pathMatchers(HttpMethod.GET, "/api/v1/reportes").hasAuthority("ROLE_ADMIN")
                         .anyExchange().authenticated()
                 )
                 .addFilterAt(jwtAuthenticationFilter(), SecurityWebFiltersOrder.AUTHENTICATION)

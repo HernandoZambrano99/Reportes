@@ -60,7 +60,7 @@ implements ReporteRepository {
     @Override
     public Mono<Reporte> getReporte(String id) {
         Key key = Key.builder().partitionValue(id).build();
-        return Mono.fromFuture(table.getItem(key)) // table es protected ahora
+        return Mono.fromFuture(table.getItem(key))
                 .map(entity -> {
                     if (entity == null)
                         return new Reporte(id, 0L, BigDecimal.ZERO);

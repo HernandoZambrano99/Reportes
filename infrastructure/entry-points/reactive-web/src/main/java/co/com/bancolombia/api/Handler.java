@@ -1,5 +1,6 @@
 package co.com.bancolombia.api;
 
+import co.com.bancolombia.api.constants.AppConstants;
 import co.com.bancolombia.usecase.reporte.ReporteUseCase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,18 +21,17 @@ public class Handler {
 
     public Mono<ServerResponse> getReporte(ServerRequest req) {
         String trace = UUID.randomUUID().toString();
-        log.debug("GET /api/v1/reportes trace={}", trace);
+        log.debug(AppConstants.LOG_GET_REPORTE_TRACE, trace);
 
         return reporteUseCase.obtenerTotal()
                 .flatMap(r -> {
                     Map<String, Object> body = Map.of(
-                            "id", r.getId(),
-                            "totalApprovedCount", r.getTotalApprovedCount(),
-                            "totalApprovedAmount", r.getTotalApprovedAmount()
+                            AppConstants.FIELD_ID, r.getId(),
+                            AppConstants.FIELD_TOTAL_SOLICITUDES_APROBADAS, r.getTotalApprovedCount(),
+                            AppConstants.FIELD_TOTAL_MONTO_CREDITOS, r.getTotalApprovedAmount()
                     );
                     return ServerResponse.ok().bodyValue(body);
                 })
-                .doOnError(e -> log.error("Error en GET /api/v1/reportes" ))
-                .onErrorResume(e -> ServerResponse.status(500).bodyValue(Map.of("error", "Error consultando reporte")));
+                .doOnError(e -> log.error(AppConstants.LOG_GET_REPORTE_ERROR, e));
     }
 }
