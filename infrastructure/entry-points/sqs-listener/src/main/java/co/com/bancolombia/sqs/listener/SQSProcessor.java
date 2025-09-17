@@ -20,7 +20,6 @@ public class SQSProcessor implements Function<Message, Mono<Void>> {
 
     @Override
     public Mono<Void> apply(Message message) {
-        System.out.println(message.body());
         return Mono.fromCallable(() -> {
                     String body = message.body();
                     return objectMapper.readValue(body, SolicitudAprobada.class);

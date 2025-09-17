@@ -12,8 +12,6 @@ import java.math.BigDecimal;
 public class SolicitudAprobada {
     private Integer solicitudId;
     private String estado;
-    private String correoCliente;
-    private String nombreCliente;
     private String tipoPrestamo;
     private Integer plazo;
     private BigDecimal monto;

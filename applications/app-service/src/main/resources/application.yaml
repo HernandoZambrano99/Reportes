@@ -2,7 +2,7 @@ server:
   port: "${SERVER_PORT:8084}"
 spring:
   application:
-    name: "Reportes"
+    name: "${SPRING_APP_NAME:Reportes}"
   devtools:
     add-properties: false
   h2:
@@ -12,14 +12,14 @@ spring:
   profiles:
     include: null
 aws:
-  region: "us-east-1"
+  region: "${AWS_REGION:us-east-1}"
   dynamodb:
 #    endpoint: "http://localhost:8000"
     AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
     AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
 entrypoint:
   sqs:
-    region: "us-east-1"
+    region: "${AWS_REGION:us-east-1}"
 #    endpoint: "http://localhost:4566"
     queueUrl: "${SQS_LISTENER_APROBADA:https://sqs.us-east-1.amazonaws.com/821368348315/SolicitudAprobadaQueue}"
     waitTimeSeconds: 20
@@ -38,7 +38,7 @@ management:
       probes:
         enabled: true
 cors:
-  allowed-origins: "http://localhost:4200,http://localhost:8080"
+  allowed-origins: "${CORS_ALLOWED_ORIGINS:http://localhost:4200,http://localhost:8084}"
 security:
   jwt:
     secret: "${SPRING_SECURITY_JWT_SECRET:0Dz2RFrDttxXG9ZgQ9s6nJ8lcnFv9HQ1mFtuG3B0TXQ=}"
