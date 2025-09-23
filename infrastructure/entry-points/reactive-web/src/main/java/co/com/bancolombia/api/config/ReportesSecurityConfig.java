@@ -44,6 +44,7 @@ public class ReportesSecurityConfig {
                         .pathMatchers("/swagger-ui.html").permitAll()
                         .pathMatchers("/webjars/swagger-ui/**").permitAll()
                         .pathMatchers("/swagger-ui/**").permitAll()
+                        .pathMatchers("/actuator/health").permitAll()
 
                         .pathMatchers(HttpMethod.GET, "/api/v1/reportes").hasAuthority("ROLE_ADMIN")
                         .anyExchange().authenticated()
