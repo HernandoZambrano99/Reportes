@@ -47,3 +47,6 @@ adapter:
     region: "${AWS_REGION:us-east-1}"
     queueUrl: "${SQS_INFORME_DIARIO:https://sqs.us-east-1.amazonaws.com/821368348315/ReporteDiarioQueue}"
 #    endpoint: "http://localhost:4566 # For localstack only"
+scheduler:
+  reporte:
+    cron: "${SCHEDULER_REPORTE_CRON:0 */1 * * * *}"

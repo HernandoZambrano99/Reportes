@@ -13,8 +13,7 @@ public class ReporteScheduler {
 
     private final ReporteUseCase reporteUseCase;
 
-//    @Scheduled(cron = "0 0 2 * * *")
-    @Scheduled(cron = "0 */1 * * * *")
+    @Scheduled(cron = "${scheduler.reporte.cron}")
     public void generarReporte() {
         reporteUseCase.enviarReporteTotal()
                 .doOnError(e -> log.error("Error en envío de reporte total", e))
