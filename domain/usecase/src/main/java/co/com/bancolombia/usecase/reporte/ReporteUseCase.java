@@ -13,6 +13,8 @@ import reactor.core.publisher.Mono;
 import java.math.BigDecimal;
 import java.util.logging.Logger;
 
+import static co.com.bancolombia.usecase.reporte.constants.Constants.*;
+
 @RequiredArgsConstructor
 public class ReporteUseCase {
 
@@ -45,10 +47,10 @@ public class ReporteUseCase {
     public Mono<Void> enviarReporteTotal(){
         return obtenerTotal()
                 .flatMap(reporte -> {
-                    logger.info("Enviando reporte total a la cola: " + reporte);
+                    logger.info(LOG_ENVIANDO_REPORTE_TOTAL + reporte);
                     return reporteNotificaRepository.notificar(reporte);
                 })
-                .doOnSuccess(v -> logger.info("Reporte total notificado correctamente"))
-                .doOnError(e -> logger.warning("Error notificando reporte total: " + e.getMessage()));
+                .doOnSuccess(v -> logger.info(LOG_REPORTE_TOTAL_NOTIFICADO))
+                .doOnError(e -> logger.warning(LOG_ERROR_NOTIFICAR_REPORTE_TOTAL + e.getMessage()));
     }
 }

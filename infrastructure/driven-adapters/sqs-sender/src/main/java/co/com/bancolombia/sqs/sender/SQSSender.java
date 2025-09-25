@@ -37,7 +37,6 @@ public class SQSSender implements ReporteNotificaRepository {
     @Override
     public Mono<Void> notificar(Reporte reporte) {
         return Mono.fromCallable(() -> {
-                    // Serializamos el reporte a JSON
                     String json = objectMapper.writeValueAsString(reporte);
                     log.info("Enviando reporte diario a SQS: {}", json);
                     return json;

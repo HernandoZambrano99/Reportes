@@ -21,4 +21,13 @@ public final class Constants {
             "Error al obtener reporte: ";
 
     public static final String DATOS_INVALIDOS_SOLICITUD = "Datos inválidos para procesar solicitud aprobada";
+
+    public static final String LOG_ENVIANDO_REPORTE_TOTAL =
+            "Enviando reporte total a la cola: ";
+
+    public static final String LOG_REPORTE_TOTAL_NOTIFICADO =
+            "Reporte total notificado correctamente";
+
+    public static final String LOG_ERROR_NOTIFICAR_REPORTE_TOTAL =
+            "Error notificando reporte total: ";
 }
