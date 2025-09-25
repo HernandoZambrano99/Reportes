@@ -1,6 +1,7 @@
 package co.com.bancolombia.usecase.reporte;
 
 import co.com.bancolombia.model.reporte.Reporte;
+import co.com.bancolombia.model.reporte.gateways.ReporteNotificaRepository;
 import co.com.bancolombia.model.reporte.gateways.ReporteRepository;
 import co.com.bancolombia.model.solicitudaprobada.SolicitudAprobada;
 import co.com.bancolombia.usecase.reporte.constants.Constants;
@@ -18,6 +19,7 @@ public class ReporteUseCase {
     private static final Logger logger = Logger.getLogger(ReporteUseCase.class.getName());
     private final ReporteRepository reporteRepository;
     private static final String COUNTER_ID = Constants.COUNTER_ID;
+    private final ReporteNotificaRepository reporteNotificaRepository;
 
     public Mono<Void> procesarSolicitudAprobada(SolicitudAprobada solicitudAprobada) {
         if (solicitudAprobada == null
@@ -38,5 +40,15 @@ public class ReporteUseCase {
                     logger.warning(Constants.LOG_ERROR_OBTENER_REPORTE + e.getMessage());
                     return Mono.error(new ReporteReadException(COUNTER_ID, e.getMessage(), e));
                 });
+    }
+
+    public Mono<Void> enviarReporteTotal(){
+        return obtenerTotal()
+                .flatMap(reporte -> {
+                    logger.info("Enviando reporte total a la cola: " + reporte);
+                    return reporteNotificaRepository.notificar(reporte);
+                })
+                .doOnSuccess(v -> logger.info("Reporte total notificado correctamente"))
+                .doOnError(e -> logger.warning("Error notificando reporte total: " + e.getMessage()));
     }
 }

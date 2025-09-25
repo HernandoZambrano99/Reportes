@@ -14,7 +14,6 @@ spring:
 aws:
   region: "${AWS_REGION:us-east-1}"
   dynamodb:
-#    endpoint: "http://localhost:8000"
     AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
     AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
 entrypoint:
@@ -43,3 +42,8 @@ security:
   jwt:
     secret: "${SPRING_SECURITY_JWT_SECRET:0Dz2RFrDttxXG9ZgQ9s6nJ8lcnFv9HQ1mFtuG3B0TXQ=}"
     expiration-ms: "${SPRING_SECURITY_JWT_EXPIRATION_MS:3600000}"
+adapter:
+  sqs:
+    region: "${AWS_REGION:us-east-1}"
+    queueUrl: "${SQS_INFORME_DIARIO:https://sqs.us-east-1.amazonaws.com/821368348315/ReporteDiarioQueue}"
+#    endpoint: "http://localhost:4566 # For localstack only"
